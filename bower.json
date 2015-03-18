@@ -1,0 +1,9 @@
+{
+  "name": "Ghost Blog",
+  "dependencies": {
+    "bootstrap": "latest",
+    "chartjs": "latest",
+    "fontawesome": "latest",
+    "jquery-dateFormat": "latest"
+  }
+}
