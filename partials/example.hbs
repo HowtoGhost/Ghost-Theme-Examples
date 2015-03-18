@@ -1,0 +1,11 @@
+{{#foreach posts}}
+    <article>
+        <header>
+            <h2><a href="{{url}}">{{{title}}}</a></h2>
+        </header>
+        <section>
+            <p>{{date published_at format="DD MMMM, YYYY"}} - {{tags separator=", " prefix="Tags: "}}</p>
+            <p>{{content}}</p>
+        </section>
+    </article>
+{{/foreach}}
