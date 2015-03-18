@@ -1,0 +1,15 @@
+.nav {
+  background-color: darkgray; }
+
+body.nav-opened .menu-button {
+  background-color: darkgray !important; }
+
+.site-wrapper {
+  background-color: lightblue; }
+
+.menu-button {
+  border-color: black; }
+  .menu-button .burger, .menu-button .word {
+    color: black; }
+
+/*# sourceMappingURL=output.css.map */

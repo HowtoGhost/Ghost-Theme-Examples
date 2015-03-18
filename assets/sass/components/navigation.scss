@@ -1,0 +1,11 @@
+//
+// Navigation: CSS changes for navigation menu
+// --------------------------------------------------
+
+.nav {
+	background-color: darkgray;
+}
+
+body.nav-opened .menu-button {
+	background-color: darkgray !important;
+}
