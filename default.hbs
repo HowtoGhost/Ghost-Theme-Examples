@@ -37,12 +37,24 @@
 
     </div>
 
+    <form style="text-align:center">
+        <input id="search-field" />
+        <input type="submit" value="search">
+    </form>
+    <section id="results" style="text-align:center"></section>
+
     {{! Ghost outputs important scripts and data with this tag }}
     {{ghost_foot}}
 
     {{! The main JavaScript file for Casper }}
     <script type="text/javascript" src="{{asset "js/jquery.fitvids.js"}}"></script>
     <script type="text/javascript" src="{{asset "js/index.js"}}"></script>
+    <script src="{{asset "js/jquery.ghostHunter.min.js"}}"></script>
+    <script>
+        $("#search-field").ghostHunter({
+            results   : "#results"
+        });
+    </script>
 
 </body>
 </html>
