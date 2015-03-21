@@ -518,7 +518,7 @@ body.nav-opened .site-wrapper {
 }
 
 /* Navigation */
-body.nav-opened .nav-cover {
+/*body.nav-opened .nav-cover {
     position: fixed;
     top: 0;
     left: 0;
@@ -700,7 +700,7 @@ body.nav-opened .nav {
 .subscribe-button:before {
     font-size: 9px;
     margin-right: 6px;
-}
+}*/
 
 
 /* Create a bouncing scroll-down arrow on homepage with cover image */
