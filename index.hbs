@@ -21,6 +21,43 @@
 {{! The main content area on the homepage }}
 <main id="content" class="content" role="main">
 
+    <div class="googlesearch">
+<script>
+  (function() {
+    var cx = '001642574955008802141:txeax48vj-k';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+</div>
+
+
+<style type="text/css">
+    div.googlesearch{
+        margin-left:35%;
+    }
+    input.gsc-input {
+        border-color: #004220;
+        float:left;
+        width:225px;
+    }
+    input.gsc-search-button {
+        border-color: #004220;
+        background-color: #004220;
+        float:right;
+        width:25px;
+    }
+    table.gsc-search-box {
+        width:400px;
+    }
+</style>
+
     {{! The tag below includes the post loop - partials/loop.hbs }}
     {{> "loop"}}
 
