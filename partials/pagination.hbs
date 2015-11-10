@@ -1,0 +1,21 @@
+{{! Pagination file for custom pagination}}
+
+<nav class="pagination" role="navigation">
+    <span id="pagination-list" class="page-number"></span>
+    <div id="page-total" style="display:none;">{{pages}}</div>
+	<div id="page-current" style="display:none;">{{page}}</div>
+</nav>
+
+<script>
+    var pageTotal = document.getElementById('page-total').innerHTML;
+    var pageCurrent = document.getElementById('page-current').innerHTML;
+    var nav = document.getElementById('pagination-list');
+    console.log("here");
+    for (i = 1; i <= pageTotal; i++) {
+    	if (i == pageCurrent) {
+    		nav.innerHTML = nav.innerHTML + "<strong>" + i + "</strong>";
+    	} else {
+    		nav.innerHTML = nav.innerHTML + "<a href=/page/" + i + ">" + i + "</a>";
+    	}
+    }
+</script>
