@@ -1,13 +1,36 @@
-<div class="nav">
-    <h3 class="nav-title">Menu</h3>
-    <a href="#" class="nav-close">
-        <span class="hidden">Close</span>
-    </a>
-    <ul>
-        {{#foreach navigation}}
-            <li class="nav-{{slug}}{{#if current}} nav-current{{/if}}" role="presentation"><a href="{{url absolute="true"}}">{{label}}</a></li>
-        {{/foreach}}
-    </ul>
-    <a class="subscribe-button icon-feed" href="{{@blog.url}}/rss/">Subscribe</a>
+
+<div class="navigation">
+    {{#foreach navigation}}
+        <div class="nav-{{slug}}{{#if current}} nav-current{{/if}}" role="presentation"><a href="{{url absolute="true"}}">{{label}}</a></div>
+    {{/foreach}}
 </div>
-<span class="nav-cover"></span>
+
+<style>
+    .navigation {
+        display: flex;
+        display: -webkit-flex;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        height: 50px;
+        z-index: 100;
+
+        text-align: center; /* styling */
+        background-color: gray; /* styling */
+    }
+
+    .site-wrapper {
+        margin-top: 50px; /* This is here to keep content from going behind the menu on page load */
+    }
+
+    .navigation div {
+        flex: 1;
+        -webkit-flex: 1;
+        align-self: center; /* styling */
+        -webkit-align-self: center; /* styling */
+    }
+
+    .navigation div a {
+        color: white; /* styling */
+    }
+</style>
