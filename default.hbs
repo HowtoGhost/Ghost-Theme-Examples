@@ -30,25 +30,24 @@
         {{! Everything else gets inserted here }}
         <div id="content-flex">
             <div id="sidebar-container">
-                <div id="sidebar" {{#if @blog.cover}} style="background-image: url({{@blog.cover}}){{else}}no-cover{{/if}}">
-                    <h1 id="page-title">{{@blog.title}}</h1>
-                    <h2 id="page-description">{{@blog.description}}</h2>
-                    {{#if @blog.logo}}<a id="blog-logo" href="{{@blog.url}}"><img src="{{@blog.logo}}" alt="Blog Logo" /></a>{{/if}}
-                    {{#if @blog.navigation}}
+                <div id="sidebar" {{#if @blog.cover}} style="background-image: url({{@blog.cover}}){{else}}no-cover{{/if}}"> {{! Background image if there is one}}
+                    <h1 id="page-title">{{@blog.title}}</h1> {{! Blog Title }}
+                    <h2 id="page-description">{{@blog.description}}</h2> {{! Blog Description }}
+                    {{#if @blog.logo}}<a id="blog-logo" href="{{@blog.url}}"><img src="{{@blog.logo}}" alt="Blog Logo" /></a>{{/if}} {{! Blog logo if there is one }}
+                    {{#if @blog.navigation}} {{! Blog navigation }}
                         {{navigation}}
                     {{/if}}
                 </div>
             </div>
             <div id="content-body">
-                {{{body}}}
+                {{{body}}} {{! All of the content, so index.hbs, post.hbs, etc }}
 
-                <footer class="site-footer clearfix">
+                <footer class="site-footer clearfix"> {{! Footer }}
                     <section class="copyright"><a href="{{@blog.url}}">{{@blog.title}}</a> &copy; {{date format="YYYY"}}</section>
                     <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
                 </footer>
             </div>
         </div>
-
     </div>
 
     {{! Ghost outputs important scripts and data with this tag }}
