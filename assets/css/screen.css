@@ -1829,8 +1829,6 @@ body:not(.post-template) .post-title {
 #content-flex {
     display: flex; /* Display content as flex to keep sidebar on the left */
     display: -webkit-flex;
-    /*min-height: 100vh;  Make the min-height the full size of the viewable screen 
-    height: 100%; */
 }
 
 #sidebar-container {
