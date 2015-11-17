@@ -1823,6 +1823,45 @@ body:not(.post-template) .post-title {
 
 }
 
+/* ==========================================================================
+   11.5. Sidebar Nav Menu
+   ========================================================================== */
+#content-flex {
+    display: flex; /* Display content as flex to keep sidebar on the left */
+    display: -webkit-flex;
+    /*min-height: 100vh;  Make the min-height the full size of the viewable screen 
+    height: 100%; */
+}
+
+#sidebar-container {
+    width: 250px; /* Set the width so it always stays the same */
+}
+
+#sidebar {
+    text-align: center;
+    padding-top: 75px;
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+}
+
+#content-body {
+    flex: 1;
+    -webkit-flex: 1;
+}
+
+#blog-logo img {
+    border-radius: 50%; /* Make logo image circular */
+}
+
+#sidebar h1, #sidebar h2, #sidebar a {
+    color: white;
+}
+
+#nav ul {
+    list-style: none;
+    padding: 0;
+}
 
 /* ==========================================================================
    12. Animations
