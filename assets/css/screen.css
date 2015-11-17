@@ -1841,7 +1841,7 @@ body:not(.post-template) .post-title {
     text-align: center;
     padding-top: 75px;
     width: 250px;
-    height: 100vh;
+    height: 100vh; /* full height of the window */
     position: fixed;
 }
 
