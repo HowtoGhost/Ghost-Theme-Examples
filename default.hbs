@@ -26,10 +26,9 @@
     {{!-- {{navigation}} --}}
 
     <div class="site-wrapper">
-
-        {{! Everything else gets inserted here }}
+        {{! Beginning of content }}
         <div id="content-flex">
-            <div id="sidebar-container">
+            <div id="sidebar-container"> {{! Sidebar }}
                 <div id="sidebar" {{#if @blog.cover}} style="background-image: url({{@blog.cover}}){{else}}no-cover{{/if}}"> {{! Background image if there is one}}
                     <h1 id="page-title">{{@blog.title}}</h1> {{! Blog Title }}
                     <h2 id="page-description">{{@blog.description}}</h2> {{! Blog Description }}
@@ -39,7 +38,7 @@
                     {{/if}}
                 </div>
             </div>
-            <div id="content-body">
+            <div id="content-body"> {{! Blog content }}
                 {{{body}}} {{! All of the content, so index.hbs, post.hbs, etc }}
 
                 <footer class="site-footer clearfix"> {{! Footer }}
