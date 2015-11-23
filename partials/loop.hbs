@@ -10,7 +10,11 @@
         <h2 class="post-title"><a href="{{url}}">{{{title}}}</a></h2>
     </header>
     <section class="post-excerpt">
+        {{#has tag="full"}}
+            <p>{{content}}</p>
+        {{else}}
         <p>{{excerpt words="26"}} <a class="read-more" href="{{url}}">&raquo;</a></p>
+        {{/has}}
     </section>
     <footer class="post-meta">
         {{#if author.image}}<img class="author-thumb" src="{{author.image}}" alt="Author image" nopin="nopin" />{{/if}}
