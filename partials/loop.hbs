@@ -1,10 +1,61 @@
-{{! Previous/next page links - only displayed on page 2+ }}
-<div class="extra-pagination inner">
-    {{pagination}}
-</div>
 
 {{! This is the post loop - each post will be output using this markup }}
-{{#foreach posts}}
+<article id="temp-id" class="html-template" style="display:none;">
+    <header class="post-header">
+        <h2 class="post-title"><a></a></h2>
+    </header>
+    <section class="post-excerpt">
+        <p><a class="read-more">&raquo;</a></p>
+    </section>
+    <footer class="post-meta">
+        <img class="author-thumb" alt="Author image" nopin="nopin" />
+        <time class="post-date"></time>
+    </footer>
+</article>
+
+<script>
+    $.ajax({url: apiURL + '/ghost/api/v0.1/posts/?client_id=' + clientId + '&client_secret=' + clientSecret, type: 'get'}).done(function (data){
+        console.log(data);
+        for (i = 0; i < data.posts.length; i++) {
+            addPost(data.posts[i]);
+        }
+    }).fail(function (err){
+      console.log(err);
+    });
+
+function addPost(data) {
+    console.log(data);
+    var template = $('.html-template');
+    $('#content').append(template);
+    $('#temp-id').removeClass("html-template").addClass('post');
+    if (data.featured === true) {
+        $('#temp-id').addClass("featured");
+    }
+
+    $('#temp-id .post-header .post-title a').attr("href", data.url).text(data.title);
+    $('#temp-id .post-excerpt p').html(data.html.substring(0, 450));
+    $('#temp-id .post-excerpt p a').attr("href", data.url);
+
+    $('#temp-id footer').text(data.author);
+    $('#temp-id footer time').attr("datetime", data.published_at).text(data.published_at);
+    $('#temp-id').show();
+    $('#temp-id').removeAttr("id");
+    
+
+    //Start building the html
+    // if (data.posts.featured === true) { //If post is featured
+    //     $('#content').add('<article class="post featured">');
+    // } else {
+    //     $('#content').add('<article class="post">');
+    // }
+
+    // $('#content').add('<header class="post-header"><h2 class="post-title"><a href="' + data.posts.url + '">' + data.posts.title '</a></h2></header>');
+    // $('#content').add('<section class="post-excerpt"><p>' + data.posts.html + ' <a class="read-more" href="' data.posts.url'">&raquo;</a></p>
+    // </section>');
+}
+
+</script>
+{{!-- {{#foreach posts}}
 <article class="{{post_class}}">
     <header class="post-header">
         <h2 class="post-title"><a href="{{url}}">{{{title}}}</a></h2>
@@ -19,7 +70,7 @@
         <time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="DD MMMM YYYY"}}</time>
     </footer>
 </article>
-{{/foreach}}
+{{/foreach}} --}}
 
 {{! Previous/next page links - displayed on every page }}
 {{pagination}}
