@@ -1,0 +1,28 @@
+{{!< default}}
+
+<header class="main-header post-head {{#if image}}" style="background-image: url({{image}}){{else}}no-cover{{/if}}">
+    <nav class="main-nav {{#if image}}overlay{{/if}} clearfix">
+        {{#if @blog.logo}}<a class="blog-logo" href="{{@blog.url}}"><img src="{{@blog.logo}}" alt="{{@blog.title}}" /></a>{{/if}}
+        {{#if @blog.navigation}}
+            <a class="menu-button icon-menu" href="#"><span class="word">Menu</span></a>
+        {{/if}}
+    </nav>
+</header>
+
+{{#get "posts" limit="all" include="author,tags" filter="tag:how-to"}}
+  {{#foreach posts}}
+    <main class="content" role="main">
+        <article class="{{post_class}}">
+
+            <header class="post-header">
+                <h1 class="post-title">{{title}}</h1>
+            </header>
+
+            <section class="post-content">
+                {{content}}
+            </section>
+
+        </article>
+    </main>
+  {{/foreach}}
+{{/get}}
