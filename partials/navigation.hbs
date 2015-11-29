@@ -9,5 +9,14 @@
         {{/foreach}}
     </ul>
     <a class="subscribe-button icon-feed" href="{{@blog.url}}/rss/">Subscribe</a>
+
+     <ul>
+        {{#get "users" limit="all"}}
+          {{#foreach users}}
+            <li><a href="/author/{{slug}}">{{name}}</a></li>
+          {{/foreach}}
+        {{/get}}
+    </ul>
+    
 </div>
 <span class="nav-cover"></span>
