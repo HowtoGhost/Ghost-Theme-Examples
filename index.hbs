@@ -21,7 +21,11 @@
 {{! The main content area on the homepage }}
 <main id="content" class="content" role="main">
 
-    {{! The tag below includes the post loop - partials/loop.hbs }}
-    {{> "loop"}}
+    {{!-- The ajax script is going to fill in this content --}}
 
 </main>
+
+<div id="pagination-buttons" style="text-align:center;">
+    <button id="prev-posts" disabled><a>Previous Posts</a></button>
+    <button id="next-posts"><a>Next Posts</a></button>
+</div>
