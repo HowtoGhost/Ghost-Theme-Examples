@@ -13,7 +13,7 @@
      <ul>
         {{#get "users" limit="all"}}
           {{#foreach users}}
-            <li><a href="/author/{{slug}}">{{name}}</a></li>
+            <li><a href="{{url}}">{{name}}</a></li>
           {{/foreach}}
         {{/get}}
     </ul>
