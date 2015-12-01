@@ -1,11 +1,11 @@
 $(document).ready(function() {
     //Grab api url, this is just checking to see if there is a port in the url
     if (window.location.port == "") {
-        var baseUrl = window.location.protocol + "//" + window.location.hostname
-        var apiUrl = baseUrl + '/ghost/api/v0.1/'
+        var baseUrl = ghost.url
+        var apiUrl = ghost.url.api();
     } else {
-        var baseUrl = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
-        var apiUrl =  baseUrl + '/ghost/api/v0.1/'
+        var baseUrl = ghost.url
+        var apiUrl =  ghost.url.api()
     }
 
     //grab client id and secret
@@ -14,18 +14,18 @@ $(document).ready(function() {
         //set pagination to be the number of posts you wish to load
         pagination = 2;
         
-    //Set the next page based on what is in the url
-    var nextPage = location.href.split("page=")[1];
+    //Set the current page based on what is in the url
+    var currentPage = location.href.split("page=")[1];
 
     //If no values, set it to one
-    if (typeof(nextPage) == "undefined") {
-        nextPage = 1;
+    if (typeof(currentPage) == "undefined") {
+        currentPage = 1;
     }
 
     //Start loading all the posts for the current page
     $.ajax({
-        //go grab the pagination number of posts on the next page and include the tags
-        url: apiUrl + 'posts/?include=tags&limit=' + pagination + '&page=' + nextPage + '&client_id=' + clientId + '&client_secret=' + clientSecret,
+        //go grab the pagination number of posts on the current page and include the tags
+        url: apiUrl + 'posts/?include=tags&limit=' + pagination + '&page=' + currentPage + '&client_id=' + clientId + '&client_secret=' + clientSecret,
         type: 'get'
     }).done(function(data) {
         //if there are no more pages, disable next post button
@@ -101,7 +101,5 @@ $(document).ready(function() {
 
         //Append the html to the content of the blog
         $('#content').append(postInfo);
-        //incriment next page so it will get the next page of posts if hit again.
-        nextPage += 1;
     }
 });
