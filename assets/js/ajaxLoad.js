@@ -1,11 +1,9 @@
 $(document).ready(function() {
     //Grab api url, this is just checking to see if there is a port in the url
     if (window.location.port == "") {
-        var baseUrl = ghost.url
-        var apiUrl = ghost.url.api();
+        var baseUrl = window.location.protocol + "//" + window.location.hostname;
     } else {
-        var baseUrl = ghost.url
-        var apiUrl =  ghost.url.api()
+        var baseUrl = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port;
     }
 
     //grab client id and secret
@@ -25,9 +23,10 @@ $(document).ready(function() {
     //Start loading all the posts for the current page
     $.ajax({
         //go grab the pagination number of posts on the current page and include the tags
-        url: apiUrl + 'posts/?include=tags&limit=' + pagination + '&page=' + currentPage + '&client_id=' + clientId + '&client_secret=' + clientSecret,
+        url: ghost.url.api('posts', {limit: pagination, page: currentPage, include: 'tags,author'}),
         type: 'get'
     }).done(function(data) {
+        console.log(data);
         //if there are no more pages, disable next post button
         if (data.meta.pagination.next == null) {
             $('#next-posts').attr('disabled', 'disabled');
@@ -54,7 +53,7 @@ $(document).ready(function() {
         $.each(data.posts, function(i, post) {
             //Take the author of the post, and now go get that data to fill in
             $.ajax({
-                url: apiUrl + 'users/?filter=id:' + post.author + '&client_id=' + clientId + '&client_secret=' + clientSecret,
+                url: ghost.url.api('users', {id: post.author}),
                 type: 'get'
             }).done(function(data) {
                 $.each(data.users, function(i, users) {
