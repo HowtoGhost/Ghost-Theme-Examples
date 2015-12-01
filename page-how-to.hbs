@@ -9,7 +9,7 @@
     </nav>
 </header>
 
-{{#get "posts" limit="all" include="author,tags" filter="tag:how-to"}}
+{{#get "posts" limit="all" include="author,tags" filter="tags:how-to"}}
   {{#foreach posts}}
     <article class="{{post_class}}">
         <header class="post-header">
