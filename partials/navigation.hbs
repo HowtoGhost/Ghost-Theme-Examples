@@ -8,6 +8,29 @@
             <li class="nav-{{slug}}{{#if current}} nav-current{{/if}}" role="presentation"><a href="{{url absolute="true"}}">{{label}}</a></li>
         {{/foreach}}
     </ul>
-    <a class="subscribe-button icon-feed" href="{{@blog.url}}/rss/">Subscribe</a>
+
+    <ul>
+        {{#get "users" limit="all"}}
+          {{#foreach users}}
+            <li><a href="{{url}}">{{name}}</a></li>
+          {{/foreach}}
+        {{/get}}
+    </ul>
+
+    <ul id="tags-list">
+
+    </ul>
+
+    <script>
+        $.get(ghost.url.api('tags')).done(function (data){
+          $.each(data.tags, function(i, tags) {
+                $('#tags-list').append('<li><a href="/tag/' + tags.slug + '">' + tags.name + '</a></li>');
+            })
+        }).fail(function (err){
+          console.log(err);
+        });
+    </script>
+
+    
 </div>
 <span class="nav-cover"></span>
