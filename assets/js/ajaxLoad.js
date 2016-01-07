@@ -1,8 +1,5 @@
 $(document).ready(function() {
     //Grab necessary values like the api url, client id and secret
-    var apiUrl = window.location.href + '/ghost/api/v0.1/',
-        clientId = $('[property="ghost:client_id"]').attr('content'),
-        clientSecret = $('[property="ghost:client_secret"]').attr('content'),
         //This is set to 2 since the posts already loaded should be page 1
         nextPage = 2,
         //Set this to match the pagination used in your blog
@@ -12,14 +9,14 @@ $(document).ready(function() {
     $('#load-posts').click(function() {
         $.ajax({
             //go grab the pagination number of posts on the next page and include the tags
-            url: apiUrl + 'posts/?include=tags&limit=' + pagination + '&page=' + nextPage + '&client_id=' + clientId + '&client_secret=' + clientSecret,
+            url: ghost.url.api("posts") + '&include=tags&limit=' + pagination + '&page=' + nextPage,
             type: 'get'
         }).done(function(data) {
             //for each post returned
             $.each(data.posts, function(i, post) {
                 //Take the author of the post, and now go get that data to fill in
                 $.ajax({
-                    url: apiUrl + 'users/?filter=id:' + post.author + '&client_id=' + clientId + '&client_secret=' + clientSecret,
+                    url: ghost.url.api("users") + '&filter=id:' + post.author,
                     type: 'get'
                 }).done(function(data) {
                     $.each(data.users, function(i, users) {
@@ -45,7 +42,7 @@ $(document).ready(function() {
                     <h2 class="post-title"><a href="' + postData.url + '">' + postData.title + '</a></h2>\
                 </header>\
                 <section class="post-excerpt">\
-                    <p>' + postData.markdown + '<a class="read-more" href="' + postData.url + '">&raquo;</a></p>\
+                    <p>' + postData.html + '<a class="read-more" href="' + postData.url + '">&raquo;</a></p>\
                 </section>\
                 <footer class="post-meta">'
 

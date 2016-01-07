@@ -26,15 +26,6 @@
 
     {{! Ghost outputs important style and meta data with this tag }}
     {{ghost_head}}
-
-<script type="text/javascript">
-    //Grab the client secret and client id
-    var clientId = $('[property="ghost:client_id"]').attr('content');
-    var clientSecret = $('[property="ghost:client_secret"]').attr('content');
-
-    //Grab base url
-    var apiURL = window.location.protocol + "//" + window.location.hostname;
-</script>
 </head>
 <body class="{{body_class}} nav-closed">
 
