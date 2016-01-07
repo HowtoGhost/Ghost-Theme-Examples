@@ -1,9 +1,9 @@
 $(document).ready(function() {
     //Grab necessary values like the api url, client id and secret
-        //This is set to 2 since the posts already loaded should be page 1
-        nextPage = 2,
-        //Set this to match the pagination used in your blog
-        pagination = 1;
+    //This is set to 2 since the posts already loaded should be page 1
+    nextPage = 2;
+    //Set this to match the pagination used in your blog
+    pagination = 1;
 
     //on button click
     $('#load-posts').click(function() {
@@ -42,9 +42,8 @@ $(document).ready(function() {
                     <h2 class="post-title"><a href="' + postData.url + '">' + postData.title + '</a></h2>\
                 </header>\
                 <section class="post-excerpt">\
-                    <p>' + postData.html + '<a class="read-more" href="' + postData.url + '">&raquo;</a></p>\
-                </section>\
-                <footer class="post-meta">'
+                    <p>' + postData.html + '<a class="read-more" href="' + postData.url + '">& raquo; < /a></p > \
+            < /section>\ < footer class = "post-meta" > '
 
         //if no author image, dont include it
         if (authorData.Image != null) {
