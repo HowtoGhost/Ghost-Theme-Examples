@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    //Grab necessary values like the api url, client id and secret
     //This is set to 2 since the posts already loaded should be page 1
     nextPage = 2;
     //Set this to match the pagination used in your blog
