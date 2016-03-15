@@ -17,6 +17,7 @@
     {{! Styles'n'Scripts }}
     <link rel="stylesheet" type="text/css" href="{{asset "css/screen.css"}}" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <script   src="https://code.jquery.com/jquery-2.2.1.min.js"   integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="   crossorigin="anonymous"></script>
 
     {{! Ghost outputs important style and meta data with this tag }}
     {{ghost_head}}
@@ -24,6 +25,42 @@
 <body class="{{body_class}} nav-closed">
 
     {{navigation}}
+
+    <div id="site-search">
+        <input class="typeahead" type="text" placeholder="Search">
+    </div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js
+"></script>
+    <script>
+    //Go grab all the posts on the blog
+    $.get(ghost.url.api('posts', {limit: "all"})).done(function(data) {
+        var searchData = data.posts; //add all the data to a variable
+
+        //New bloodhound to make it searchable
+        var search = new Bloodhound({
+          datumTokenizer: Bloodhound.tokenizers.obj.whitespace('title'),
+          queryTokenizer: Bloodhound.tokenizers.whitespace,
+          // `states` is an array of state names defined in "The Basics"
+          local: searchData
+        });
+
+        //Build the typeahead
+        $('#site-search .typeahead').typeahead(null, {
+              name: 'search',
+              source: search,
+              templates: {
+                empty: [
+                    '<div class="empty-message">',
+                    'unable to find any post that match the current query',
+                    '</div>'
+                ].join('\n'),
+                suggestion: function(data) {
+                    return '<p><strong><a href="' + data.url + '">' + data.title + '</a></strong>';
+                }
+            }
+        }); 
+    });
+    </script>
 
     <div class="site-wrapper">
 
