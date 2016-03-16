@@ -26,38 +26,50 @@
 
     {{navigation}}
 
-    <div id="site-search">
+    <div id="site-search" style="display:none;"> <!--Hide this until getting data is successful-->
         <input class="typeahead" type="text" placeholder="Search">
     </div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js
 "></script>
     <script>
-    //Go grab all the posts on the blog
-    $.get(ghost.url.api('posts', {limit: "all"})).done(function(data) {
-        var searchData = data.posts; //add all the data to a variable
+    //Wait for other things to be loaded so the site doesn't wait on the search
+    $(document).ready(function() {
+        //Go grab all the posts on the blog, but only the slug and title fields
+        //That helps limit the amount of data sent and stored locally
+        $.get(ghost.url.api('posts', {limit: "all", fields: "slug,title"})).done(function(data) {
+            //add all the data returned to a variable
+            var searchData = data.posts; 
 
-        //New bloodhound to make it searchable
-        var search = new Bloodhound({
-          datumTokenizer: Bloodhound.tokenizers.obj.whitespace('title'),
-          queryTokenizer: Bloodhound.tokenizers.whitespace,
-          local: searchData
-        });
+            //New bloodhound to make it searchable
+            var search = new Bloodhound({
+              datumTokenizer: Bloodhound.tokenizers.obj.whitespace('title'),
+              queryTokenizer: Bloodhound.tokenizers.whitespace,
+              local: searchData
+            });
 
-        //Build the typeahead
-        $('#site-search .typeahead').typeahead(null, {
-              name: 'search',
-              source: search,
-              templates: {
-                empty: [
-                    '<div class="empty-message">',
-                    'unable to find any post that match the current query',
-                    '</div>'
-                ].join('\n'),
-                suggestion: function(data) {
-                    return '<p><strong><a href="' + data.url + '">' + data.title + '</a></strong>';
+            //Build the typeahead
+            $('#site-search .typeahead').typeahead(null, {
+                  name: 'search',
+                  //source is the bloodhound variable
+                  source: search,
+                  templates: {
+                    empty: [
+                        '<div class="empty-message">',
+                        'unable to find any post that match the current query',
+                        '</div>'
+                    ].join('\n'),
+                    suggestion: function(data) {
+                        return '<p><strong><a href="' + data.slug + '">' + data.title + '</a></strong>';
+                    }
                 }
-            }
-        }); 
+            }); 
+
+            //Now show the search bar since getting data was successful
+            $('#site-search').show();
+        }).fail(function() {
+            //If the get request errors out, put an error in the console
+            console.log("Error getting Ghost API Data");
+        });
     });
     </script>
 
