@@ -1,0 +1,52 @@
+{{!< default}}
+{{!-- The tag above means - insert everything in this file into the {body} of the default.hbs template --}}
+
+{{!-- The big featured header --}}
+<header class="main-header {{#if @blog.cover}}" style="background-image: url({{@blog.cover}}){{else}}no-cover{{/if}}">
+    <nav class="main-nav overlay clearfix">
+        {{#if @blog.logo}}<a class="blog-logo" href="{{@blog.url}}"><img src="{{@blog.logo}}" alt="{{@blog.title}}" /></a>{{/if}}
+        {{#if @blog.navigation}}
+            <a class="menu-button icon-menu" href="#"><span class="word">Menu</span></a>
+        {{/if}}
+    </nav>
+    <div class="vertical">
+        <div class="main-header-content inner">
+            <h1 class="page-title">HOME PAGE</h1>
+            <h2 class="page-description">{{@blog.description}}</h2>
+        </div>
+    </div>
+    <a class="scroll-down icon-arrow-left" href="#content" data-offset="-45"><span class="hidden">Scroll Down</span></a>
+</header>
+
+{{!-- The main content area on the homepage --}}
+<main id="content" class="content" role="main">
+
+    {{#get "posts" limit="2" include="tags,author"}}
+        {{#foreach posts}}
+        <article class="{{post_class}}">
+            <header class="post-header">
+                <h2 class="post-title"><a href="{{url}}">{{{title}}}</a></h2>
+            </header>
+            <section class="post-excerpt">
+                <p>{{excerpt words="26"}} <a class="read-more" href="{{url}}">&raquo;</a></p>
+            </section>
+            <footer class="post-meta">
+                {{#if author.image}}<img class="author-thumb" src="{{author.image}}" alt="Author image" nopin="nopin" />{{/if}}
+                {{author}}
+                {{tags prefix=" on "}}
+                <time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="DD MMMM YYYY"}}</time>
+            </footer>
+        </article>
+        {{/foreach}}
+        {{! Have to have custom pagination pointing to the correct page because default pagination won't work }}
+        {{pagination}}
+        <script>
+            var olderPost = document.getElementsByClassName('older-posts');
+            var url = '/page/2';
+            if (olderPost[0].getAttribute('href') === '') {
+                olderPost[0].setAttribute('href', url);
+            }
+        </script>
+    {{/get}}
+
+</main>
